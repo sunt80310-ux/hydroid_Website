@@ -10,7 +10,7 @@
     "install:all": "npm install --workspaces",
     "dev:frontend": "npm --prefix frontend run dev",
     "dev:backend": "npm --prefix backend run dev",
-    "build": "npm --prefix frontend run build",
+    "build": "npm install --workspaces && npm --prefix frontend run build",
     "test": "npm --prefix backend test"
   }
 }
