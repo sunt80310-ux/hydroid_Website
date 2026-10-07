@@ -25,3 +25,18 @@ test('inquiry validation checks required fields and accepts a valid submission',
  assert.equal(validateInquiry({name:'Aarav Mehta',contactNumber:'not-a-phone',email:'aarav@example.com',city:'Pune'}),'Enter a valid contact number (4 to 24 digits).');
  assert.equal(validateInquiry({name:'Aarav Mehta',contactNumber:'+91 98765 43210',email:'aarav@example.com',city:'Pune'}),'');
 });
+
+test('CORS origin checking permits local development origins and comma-separated FRONTEND_ORIGIN',async()=>{
+ const {isOriginAllowed} = await import('./app.js');
+ assert.equal(isOriginAllowed(''), true);
+ assert.equal(isOriginAllowed('http://127.0.0.1:4174'), true);
+ assert.equal(isOriginAllowed('http://localhost:4174'), true);
+ assert.equal(isOriginAllowed('http://localhost:5173'), true);
+
+ process.env.FRONTEND_ORIGIN = 'https://www.veids.in,https://veids.in,https://hydroid.vercel.app';
+ assert.equal(isOriginAllowed('https://www.veids.in'), true);
+ assert.equal(isOriginAllowed('https://veids.in'), true);
+ assert.equal(isOriginAllowed('https://hydroid.vercel.app'), true);
+ assert.equal(isOriginAllowed('https://malicious-site.com'), false);
+});
+

@@ -15,7 +15,7 @@ const allowedOrigins = new Set([
  'http://127.0.0.1:5173'
 ]);
 
-function isOriginAllowed(origin){
+export function isOriginAllowed(origin){
  if(!origin)return true;
  if(process.env.FRONTEND_ORIGIN){
   const origins=process.env.FRONTEND_ORIGIN.split(',').map(s=>s.trim());
