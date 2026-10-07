@@ -1,0 +1,7 @@
+{
+  "buildCommand": "npm install --workspaces && cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "env": {
+    "NODE_VERSION": "22.11.0"
+  }
+}
